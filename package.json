@@ -1,0 +1,25 @@
+{
+  "name": "@definejs/cli",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "bin": {
+    "definejs": "bin/definejs.js"
+  },
+  "keywords": [],
+  "author": "micty",
+  "email": "mictydeng@qq.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/definejs/cli.git"
+  },
+  "dependencies": {
+    "@definejs/file": "^0.1.8",
+    "@definejs/packer": "^0.1.4",
+    "colors": "^1.4.0",
+    "commander": "^5.1.0",
+    "inquirer": "^7.3.3"
+  }
+}
