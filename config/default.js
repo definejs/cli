@@ -1,17 +1,18 @@
 
 //默认的配置。
+//请根据情况自行修改。
 module.exports = {
     //必选，是否需要通过 `npm install` 进行安装包。
     //在某些情况下，为了加快打包速度，可以避免重复下载和安装包。
     //指定为 true，则会删除之前的包（如果存在），并且重新下载和安装包。
-    //指定为 false，可以复用之前已安装下好的包，请确保 tempDir 目录中的包已存在。
+    //指定为 false，可以复用之前已安装下好的包，请确保 tempDir 字段代表的目录中的包已存在。
     install: true,
 
     //必选，需要打包的种子 package 名称列表，会自动搜索所有依赖的包。
     //包的域名 `@definejs/` 可加可不加，如果不加，则工具会自动补全。
-    //这些种子包会给添加到 tempDir 目录中的 package.json 文件中的 dependencies 字段中。
+    //这些种子包会给添加到 tempDir 字段代表的目录中的 package.json 文件中的 dependencies 字段中。
     packages: [
-
+        // 'api',
     ],
 
     // //以下方式可以指定版本号，必须使用全名称，即包括域名 `@definejs/`。
@@ -31,11 +32,12 @@ module.exports = {
 
     //必选，需要导出的全局对象。
     globalExports: {
-        name: 'KISP',
+        // name: 'KISP',
+        name: 'YourGlobalName',   //合并成一个库后，对外导出的全局变量名。 如 jquery 库在 window 中的全局变量名 `jQuery`。
 
         //可选，需要绑定到全局对象的快捷方法。
         bind: {
-
+            // panel: 'Panel.define',      //定义一个 panel。
         },
     },
 
