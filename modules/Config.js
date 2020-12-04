@@ -101,10 +101,10 @@ module.exports = {
         let src = path.join(__dirname, '../config', `${type}.js`);
         let cwd = process.cwd();
         // let src1 = path.relative(cwd, src);
-        // let dest1 = path.relative(cwd, dest);
+        let dest1 = path.relative(cwd, dest);
 
         File.copy(src, dest);
-        console.log('copy'.bgGreen, src.green, '->', dest.green)
+        console.log('copy'.bgGreen, src.green, '->', dest1.green)
     },
 
 };
