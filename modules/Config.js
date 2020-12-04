@@ -75,7 +75,7 @@ module.exports = {
 
     get(opts) {
         let { config, } = opts;
-        
+
         config = load(config);
         config = merge(config, opts);
 
@@ -100,11 +100,11 @@ module.exports = {
     copy(type, dest) {
         let src = path.join(__dirname, '../config', `${type}.js`);
         let cwd = process.cwd();
-        let src1 = path.relative(cwd, src);
-        let dest1 = path.relative(cwd, dest);
+        // let src1 = path.relative(cwd, src);
+        // let dest1 = path.relative(cwd, dest);
 
         File.copy(src, dest);
-        console.log('copy'.bgGreen, src1.green, '->', dest1.green)
+        console.log('copy'.bgGreen, src.green, '->', dest.green)
     },
 
 };
