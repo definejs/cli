@@ -13,17 +13,15 @@ module.exports = {
     //这些种子包会给添加到 tempDir 字段代表的目录中的 package.json 文件中的 dependencies 字段中。
     packages: [
         'alert',
-        'confirm',
         'api',
         'app',
+        'confirm',
         'defaults',
         'emitter',
         'panel',
-        'view',
-        'alert',
-        'confirm',
         'package',
         'proxy',
+        'view',
     ],
 
     // //以下方式可以指定版本号，必须使用全名称，即包括域名 `@definejs/`。
