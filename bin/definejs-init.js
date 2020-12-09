@@ -22,7 +22,7 @@ if (!type) {
 
 let dir = program.args[1] || '';
 let cwd = process.cwd();
-let dest = path.join(cwd, dir, 'config.js');
+let dest = path.join(cwd, dir, Config.name);
 
 
 

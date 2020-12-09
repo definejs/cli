@@ -6,9 +6,8 @@ const File = require('@definejs/file');
 
 //加载指定文件的配置对象。
 function load(name) {
-    let NAME = 'config.js';     //默认值。
     let cwd = process.cwd();
-    let file = path.join(cwd, name || NAME);
+    let file = path.join(cwd, name || exports.name);
     let config = null;
 
     if (!name) { //没指定值，则使用了默认值，检测是否存在文件。
@@ -71,7 +70,8 @@ function merge(config, opts) {
 
 
 
-module.exports = {
+module.exports = exports = {
+    name: 'definejs.packer.config.js', //默认文件名，只读。
 
     get(opts) {
         let { config, } = opts;
