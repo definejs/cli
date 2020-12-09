@@ -104,7 +104,7 @@ module.exports = {
         let dest1 = path.relative(cwd, dest);
 
         File.copy(src, dest);
-        console.log('copy'.bgGreen, src.green, '->', dest1.green)
+        console.log('copy'.bgCyan, src.blue, '->', dest1.blue)
     },
 
 };

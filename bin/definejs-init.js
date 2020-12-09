@@ -2,10 +2,11 @@
 require('colors');
 
 const path = require('path');
-const File = require('@definejs/file');
 const { program, } = require('commander');
 const inquirer = require('inquirer');
+const fs = require('fs');
 const Config = require('../modules/Config');
+
 
 program.usage('<template-name> [project-name]');
 program.option('-f, --force', 'force overwite the target config.js file when it is existed.');
@@ -25,15 +26,34 @@ let dest = path.join(cwd, dir, 'config.js');
 
 
 
+//没有显式指定要强制覆盖，且已存在目标文件，则弹出确认提示。
+if (!opts.force && fs.existsSync(dest) ) {
+    console.log('target config.js is already existed.'.red);
+    prompt(copy);
+}
+else {
+    copy();
+}
+
+
+
+
+
 function copy() {
     Config.copy(type, dest);
 
+    console.log('init completed!'.green);
+    console.log('To get started, run command:');
+
+    //如果指定了子目录，则提示进入该目录。
     if (dir) {
-        console.log('Please change directory to'.magenta, dir.yellow);
+        console.log(`cd ${dir}`.yellow);
     }
+
+    console.log('definejs pack'.yellow);
 }
 
-function  prompt() {
+function prompt(next) {
     inquirer.prompt([
         {
             name: 'overwrite',
@@ -42,7 +62,7 @@ function  prompt() {
         },
     ]).then((answer) => {
         let { overwrite, } = answer;
-        
+
         overwrite = overwrite.toUpperCase();
 
         if (overwrite == 'N') {
@@ -50,19 +70,10 @@ function  prompt() {
         }
 
         if (overwrite == 'Y') {
-            copy();
+            next();
         }
         else {
-            prompt();
+            prompt(next);
         }
     });
-}
-
-//没有显式指定要强制覆盖，且已存在目标文件，则弹出确认提示。
-if (!opts.force && File.exists(dest) ) {
-    console.log('target'.yellow, 'config.js'.magenta, 'is already existed.'.yellow);
-    prompt();
-}
-else {
-    copy();
 }
