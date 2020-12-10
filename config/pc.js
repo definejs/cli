@@ -12,15 +12,50 @@ module.exports = {
     //包的域名 `@definejs/` 可加可不加，如果不加，则工具会自动补全。
     //这些种子包会给添加到 tempDir 字段代表的目录中的 package.json 文件中的 dependencies 字段中。
     packages: [
-        'alert',
+        //tool 目录。
+        'defaults', //这个是打包成单独库必需的。
+
+        //$ 目录。
+        'app-module',
+        'array',
+        'date',
+        'emitter',
+        'escape',
+        'fn',
+        'hash',
+        'json',
+        'math',
+        'module-manager',
+        'object',
+        'query',
+        'string',
+        'style',
+        'tasker',
+        'timer',
+        'tree',
+
+        //browser 目录。
         'api',
         'app',
-        'confirm',
-        'defaults',
-        'emitter',
-        'panel',
+        'html-parser',
+        'local-storage',
+        'navigator',
         'package',
         'proxy',
+        'script',
+        'session-storage',
+        'template',
+        'url',
+
+        //ui 目录。
+        'alert',
+        'confirm',
+        'dialog',
+        'loading',
+        'masker',
+        'panel',
+        'tabs',
+        'toast',
         'view',
     ],
 
@@ -55,6 +90,13 @@ module.exports = {
             proxy: 'Proxy.response',    //设置 API 接口代理。
             route: 'App.route',         //绑定应用层子模块的顶级事件。
             view: 'View.define',        //定义一个 view。
+            
+            //提供一个快捷创建指定模块的实例的方法。
+            //目标模块必须是一个 class，以便可以进行 new 操作。
+            create: function (id, ...args) {
+                let M = require(id);
+                return new M(...args);
+            },
         },
     },
 

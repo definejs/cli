@@ -12,17 +12,66 @@ module.exports = {
     //包的域名 `@definejs/` 可加可不加，如果不加，则工具会自动补全。
     //这些种子包会给添加到 tempDir 字段代表的目录中的 package.json 文件中的 dependencies 字段中。
     packages: [
-        'mobile-app',
-        'api',
+        //tool 目录。
+        'defaults', //这个是打包成单独库必需的。
+
+        //$ 目录。
+        'app-module',
+        'array',
+        'date',
         'emitter',
-        'panel',
-        'defaults',
-        'mobile-alert',
-        'mobile-confirm',
-        'mobile-view',
-        'toast',
+        'escape',
+        'fn',
+        'hash',
+        'json',
+        'math',
+        'module-manager',
+        'object',
+        'query',
+        'string',
+        'style',
+        'tasker',
+        'timer',
+        'tree',
+
+        //browser 目录。
+        'api',
+        'app',
+        'html-parser',
+        'local-storage',
+        'navigator',
         'package',
         'proxy',
+        'script',
+        'session-storage',
+        'template',
+        'url',
+
+        //mobile 目录。
+        'iscroll',
+        'mobile-alert',
+        'mobile-app',
+        'mobile-confirm',
+        'mobile-dialog',
+        'mobile-masker',
+        'mobile-tabs',
+        'mobile-view',
+        'scroller',
+        'touch',
+        'transition-end',
+        'view-slider',
+
+        //ui 目录。
+        'alert',
+        'confirm',
+        'dialog',
+        'loading',
+        'masker',
+        'panel',
+        'tabs',
+        'toast',
+        'view',
+
     ],
 
     // //以下方式可以指定版本号，必须使用全名称，即包括域名 `@definejs/`。
@@ -46,16 +95,23 @@ module.exports = {
 
         //可选，需要绑定到全局对象的快捷方法。
         bind: {
-            alert: 'Mobile.Alert.show',        //显示一个简易的 alert 对话框。
-            confirm: 'Mobile.Confirm.show',    //显示一个简易的 confirm 对话框。
-            config: 'Defaults.config',  //设置或获取 definejs 内部模块的默认配置。 会与原有的配置作深度合并。
-            data: 'AppModule.data',     //设置或获取应用层模块所关联的自定义数据。
-            launch: 'Mobile.App.launch',       //启动应用。
-            load: 'Package.load',       //加载指定的分包资源。
-            panel: 'Panel.define',      //定义一个 panel。
-            proxy: 'Proxy.response',    //设置 API 接口代理。
-            route: 'Mobile.App.route',         //绑定应用层子模块的顶级事件。
-            view: 'Mobile.View.define',        //定义一个 view。
+            alert: 'Mobile.Alert.show',     //显示一个简易的 alert 对话框。
+            confirm: 'Mobile.Confirm.show', //显示一个简易的 confirm 对话框。
+            config: 'Defaults.config',      //设置或获取 definejs 内部模块的默认配置。 会与原有的配置作深度合并。
+            data: 'AppModule.data',         //设置或获取应用层模块所关联的自定义数据。
+            launch: 'Mobile.App.launch',    //启动应用。
+            load: 'Package.load',           //加载指定的分包资源。
+            panel: 'Panel.define',          //定义一个 panel。
+            proxy: 'Proxy.response',        //设置 API 接口代理。
+            route: 'Mobile.App.route',      //绑定应用层子模块的顶级事件。
+            view: 'Mobile.View.define',     //定义一个 view。
+
+            //提供一个快捷创建指定模块的实例的方法。
+            //目标模块必须是一个 class，以便可以进行 new 操作。
+            create: function (id, ...args) {
+                let M = require(id);
+                return new M(...args);
+            },
         },
     },
 
@@ -69,7 +125,7 @@ module.exports = {
         'font-awesome': true,               //指定为 true，则仅拷贝而不进行模块包装定义。
     },
 
-  
+
     //以下配置项不建议修改。
     //必选，下载和安装包所要存放的目录。
     tempDir: './temp/',
@@ -80,5 +136,6 @@ module.exports = {
     //可选，打包完成后需要复制到的目录，以便用于测试和体验。
     // copyDir: './test/htdocs/f/',
 
-   
+
 };
+

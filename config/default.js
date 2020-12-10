@@ -12,7 +12,27 @@ module.exports = {
     //包的域名 `@definejs/` 可加可不加，如果不加，则工具会自动补全。
     //这些种子包会给添加到 tempDir 字段代表的目录中的 package.json 文件中的 dependencies 字段中。
     packages: [
-        // 'api',
+        //tool 目录。
+        'defaults', //这个是打包成单独库必需的。
+
+        //$ 目录。
+        'app-module',
+        'array',
+        'date',
+        'emitter',
+        'escape',
+        'fn',
+        'hash',
+        'json',
+        'math',
+        'module-manager',
+        'object',
+        'query',
+        'string',
+        'style',
+        'tasker',
+        'timer',
+        'tree',
     ],
 
     // //以下方式可以指定版本号，必须使用全名称，即包括域名 `@definejs/`。
