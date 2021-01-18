@@ -1,7 +1,7 @@
 {
   "name": "@definejs/cli",
-  "version": "0.1.10",
-  "description": "",
+  "version": "1.0.0",
+  "description": "definejs cli tools.",
   "main": "index.js",
   "scripts": {},
   "bin": {
@@ -16,8 +16,8 @@
     "url": "https://github.com/definejs/cli.git"
   },
   "dependencies": {
-    "@definejs/file": "^0.1.8",
-    "@definejs/packer": "^0.1.9",
+    "@definejs/file": "^1.0.0",
+    "@definejs/packer": "^1.0.0",
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "inquirer": "^7.3.3"
