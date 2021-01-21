@@ -76,7 +76,14 @@ module.exports = {
 
     //必选，需要导出的全局对象。
     globalExports: {
-        name: 'KISP',
+        //合并成一个库后，对外导出的全局变量名。 
+        //如 jquery 库在 window 中的全局变量名 `jQuery`。
+        name: 'definejs',
+
+        //是否允许业务层的模块直接通过加载 `@definejs/` 域内的包的方式来加载对应的主模块。
+        //如果允许，则 require('@definejs/emitter'); 等价于 definejs.require('Emitter');。
+        allowRequirePackage: true,
+
 
         //可选，需要绑定到全局对象的快捷方法。
         bind: {

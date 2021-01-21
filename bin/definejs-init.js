@@ -28,7 +28,7 @@ let dest = path.join(cwd, dir, Config.name);
 
 //没有显式指定要强制覆盖，且已存在目标文件，则弹出确认提示。
 if (!opts.force && fs.existsSync(dest) ) {
-    console.log('target config.js is already existed.'.red);
+    console.log(`Target 'definejs.packer.config.js' is already existed.`.red);
     prompt(copy);
 }
 else {
@@ -42,15 +42,17 @@ else {
 function copy() {
     Config.copy(type, dest);
 
-    console.log('init completed!'.green);
-    console.log('To get started, run command:');
+    console.log('Init completed!'.green);
+    console.log('To get started, run command:'.bold);
 
     //如果指定了子目录，则提示进入该目录。
     if (dir) {
-        console.log(`cd ${dir}`.yellow);
+        console.log(`├──`, `cd ${dir}`.magenta);
     }
 
-    console.log('definejs pack'.yellow);
+    console.log(`└──`, `definejs pack`.magenta);
+
+
 }
 
 function prompt(next) {
