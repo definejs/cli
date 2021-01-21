@@ -55,7 +55,7 @@ module.exports = {
         //合并成一个库后，对外导出的全局变量名。 
         //如 jquery 库在 window 中的全局变量名 `jQuery`。
         name: 'definejs',   
-        
+
         //是否允许业务层的模块直接通过加载 `@definejs/` 域内的包的方式来加载对应的主模块。
         //如果允许，则 require('@definejs/emitter'); 等价于 definejs.require('Emitter');。
         allowRequirePackage: true,
@@ -78,6 +78,7 @@ module.exports = {
 
     //以下配置项不建议修改。
     //必选，下载和安装包所要存放的目录。
+    //！！！！注意：每次构建都会清空该目录。
     tempDir: './temp/',
 
     //必选，构建输出的目录。

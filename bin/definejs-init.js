@@ -5,7 +5,7 @@ const path = require('path');
 const { program, } = require('commander');
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Config = require('../modules/Config');
+const Config = require('../lib/Config');
 
 
 program.usage('<template-name> [project-name]');
@@ -16,8 +16,7 @@ let opts = program.opts();
 let type = program.args[0];
 
 if (!type) {
-    type = 'default';
-    console.log(`param <template-name> is not specified, it's value will be`.yellow, ` 'default'`.magenta);
+    return program.help();
 }
 
 let dir = program.args[1] || '';
@@ -28,7 +27,7 @@ let dest = path.join(cwd, dir, Config.name);
 
 //没有显式指定要强制覆盖，且已存在目标文件，则弹出确认提示。
 if (!opts.force && fs.existsSync(dest) ) {
-    console.log(`Target 'definejs.packer.config.js' is already existed.`.red);
+    console.log(`Target '${Config.name}' is already existed.`.red);
     prompt(copy);
 }
 else {
@@ -47,10 +46,10 @@ function copy() {
 
     //如果指定了子目录，则提示进入该目录。
     if (dir) {
-        console.log(`├──`, `cd ${dir}`.magenta);
+        console.log(`├──`, `cd ${dir}`.blue);
     }
 
-    console.log(`└──`, `definejs pack`.magenta);
+    console.log(`└──`, `definejs pack`.blue);
 
 
 }
@@ -60,7 +59,7 @@ function prompt(next) {
         {
             name: 'overwrite',
             type: 'input',
-            message: 'overwrite? ' + 'Y/N'.cyan,
+            message: 'Overwrite? ' + 'Y/N'.cyan,
         },
     ]).then((answer) => {
         let { overwrite, } = answer;
