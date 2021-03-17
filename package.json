@@ -1,6 +1,6 @@
 {
   "name": "@definejs/cli",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "definejs cli tools.",
   "main": "index.js",
   "scripts": {},
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@definejs/file": "^1.0.0",
-    "@definejs/packer": "^1.0.10",
+    "@definejs/packer": "^1.0.13",
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "inquirer": "^7.3.3"

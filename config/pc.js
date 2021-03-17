@@ -93,6 +93,7 @@ module.exports = {
             data: 'AppModule.data',     //设置或获取应用层模块所关联的自定义数据。
             launch: 'App.launch',       //启动应用。
             load: 'Package.load',       //加载指定的分包资源。
+            module: 'AppModule.define', //定义一个业务层的模块。
             panel: 'Panel.define',      //定义一个 panel。
             proxy: 'Proxy.response',    //设置 API 接口代理。
             route: 'App.route',         //绑定应用层子模块的顶级事件。
@@ -127,7 +128,22 @@ module.exports = {
     outputDir: './output/',
 
     //可选，打包完成后需要复制到的目录，以便用于测试和体验。
-    // copyDir: './test/htdocs/f/',
+    // copyDir: '../htdocs/f/',
 
+    //把 dependencies 合并到项目的 package.json 中去。
+    done: function (config, metaInfo) {
+        const File = require('@definejs/file');
+        
+        let file = `../package.json`;
+        let { name$version, } = metaInfo;
+        let pkg = File.readJSON(file);
+
+        pkg.dependencies = Object.assign(pkg.dependencies, name$version);
+
+        File.writeJSON(file, pkg);
+
+        console.log('=============== done ===============');
+    },
 
 };
+

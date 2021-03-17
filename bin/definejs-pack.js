@@ -18,11 +18,14 @@ if (!config) {
     return;
 }
 
-pack(config, () => {
+pack(config, (config, metaInfo) => {
     //输出最终的 config 以供查阅。
     let file = `${config.outputDir}config-lock.json`;
     File.writeJSON(file, config);
 
     console.log(`---- definejs pack success ----`.green);
+
+    let done = config.done;
+    done && done(config, metaInfo);
 });
 

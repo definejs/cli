@@ -140,7 +140,22 @@ module.exports = {
     outputDir: './output/',
 
     //可选，打包完成后需要复制到的目录，以便用于测试和体验。
-    // copyDir: './test/htdocs/f/',
+    // copyDir: '../htdocs/f/',
+
+    //把 dependencies 合并到项目的 package.json 中去。
+    done: function (config, metaInfo) {
+        const File = require('@definejs/file');
+
+        let file = `../package.json`;
+        let { name$version, } = metaInfo;
+        let pkg = File.readJSON(file);
+
+        pkg.dependencies = Object.assign(pkg.dependencies, name$version);
+
+        File.writeJSON(file, pkg);
+
+        console.log('=============== done ===============');
+    },
 
 
 };
