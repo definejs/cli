@@ -5,14 +5,14 @@ const File = require('@definejs/file');
 const Config = require('../lib/Config');
 
 
-program.option('-u, --no-install', 'do not install packages from npm.');
-program.option('--config <file>', 'use a specific config file.');
+
 
 //解析命令行参数。
 program.parse(process.argv);
 
-let opts = program.opts();
-let config = Config.get(opts);
+
+let config = Config.get();
+
 
 if (!config) {
     return;

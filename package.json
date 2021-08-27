@@ -1,7 +1,7 @@
 {
   "name": "@definejs/cli",
-  "version": "1.0.4",
-  "description": "definejs cli tools.",
+  "version": "2.0.0",
+  "description": "definejs cli tools for init and pack",
   "main": "index.js",
   "scripts": {},
   "bin": {
