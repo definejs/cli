@@ -20,8 +20,12 @@ if (!config) {
 
 pack(config, (config, metaInfo) => {
     //输出最终的 config 以供查阅。
-    let file = `${config.outputDir}config-lock.json`;
-    File.writeJSON(file, config);
+    File.writeJSON(`${config.outputDir}config.json`, config);
+
+    //输出最终的依赖包对应的具体版本号，以供查阅。
+    File.writeJSON(`${config.outputDir}info.json`, metaInfo);
+    File.writeJSON(`${config.outputDir}dependencies.json`, metaInfo.name$version);
+
 
     console.log(`---- definejs pack success ----`.green);
 

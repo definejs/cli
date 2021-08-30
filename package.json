@@ -1,6 +1,6 @@
 {
   "name": "@definejs/cli",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "definejs cli tools for init and pack",
   "main": "index.js",
   "scripts": {},

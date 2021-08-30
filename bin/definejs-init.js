@@ -18,11 +18,11 @@ let dir = program.args[1];
 
 if (!type || !dir) {
     if (!type) {
-        console.log(`Please provide <template-name>, it can be: 'default' | 'mobile' | 'pc'`.red);
+        console.log(`Please provide argument: <template-name>, eg: 'default' | 'mobile' | 'pc'`.red);
     }
 
     if (!dir) {
-        console.log(`Please provide <project-name>, eg: 'definejs-test'`.red);
+        console.log(`Please provide argument: <project-name>, eg: 'definejs-test'`.red);
     }
 
     return program.help();
