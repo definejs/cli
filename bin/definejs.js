@@ -9,6 +9,7 @@ program.version(pkg.version, '-v, --version');
 program.usage('<command> [options]');
 program.command('init', 'generate a new project from a template.');
 program.command('pack', 'pack modules of `@definejs` from NPM.');
+program.command('require', 'parse requires from modules vs dependencies from package.json');
 
 
 //解析命令行参数。
