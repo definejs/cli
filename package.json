@@ -1,6 +1,6 @@
 {
   "name": "@definejs/cli",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "definejs cli tools for init and pack definejs packages.",
   "main": "index.js",
   "scripts": {},
@@ -16,11 +16,12 @@
     "url": "https://github.com/definejs/cli.git"
   },
   "dependencies": {
+    "@definejs/directory": "^2.0.3",
     "@definejs/file": "^2.0.1",
-    "@definejs/packer": "^2.0.1",
-    "@definejs/requirer": "^2.0.1",
+    "@definejs/packer": "^2.0.2",
+    "@definejs/requirer": "^2.0.3",
     "colors": "^1.4.0",
     "commander": "^5.1.0",
-    "inquirer": "^7.3.3"
+    "ora": "^4.0.4"
   }
 }

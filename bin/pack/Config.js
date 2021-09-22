@@ -1,7 +1,6 @@
 
 const path = require('path');
 const fs = require('fs');
-const File = require('@definejs/file');
 
 
 //加载指定文件的配置对象。
@@ -38,12 +37,8 @@ module.exports = exports = {
     name: 'definejs.packer.config.js', //默认文件名，只读。
 
     get() {
-       
         let file = exports.name;
         let config = load(file);
-
-        console.log(path.resolve(file));
-
 
         if (!config) {
             console.log(`Not Found:`.bold.red, `${file.underline.red}`);
@@ -66,25 +61,6 @@ module.exports = exports = {
     },
 
 
-    /**
-    * 复制指定类型的配置文件到目标路径。
-    * @param {*} type 配置文件类型，取值有 `default`、`mobile`、`pc`。
-    * @param {*} destDir 目标目录。
-    */
-    copy(type, destDir) {
-        let files = [exports.name, 'package.json',];
-     
-
-        files.forEach((name) => {
-            let src = path.join(__dirname, `./sample/${type}/`, name);
-            let dest = path.join(destDir, name);
-
-
-            File.copy(src, dest);
-
-            console.log('copy:', src.underline.cyan);
-            console.log('  to:', dest.underline.cyan);
-        });
-    },
+    
 
 };

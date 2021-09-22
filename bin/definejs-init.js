@@ -1,90 +1,46 @@
+#!/usr/bin/env node
+
+//使用指定的模板初始化一个 definejs 打包框架项目。
+//
+//用法：
+//  definejs init <template-name> [project-name] 使用指定的模板初始化一个 definejs 打包框架项目。
+//参数：
+//  <template-name> 必选，要使用的模板。 可用的值有 `mobile`、`pc`。 可以加上具体的版本号，如 `pc@1.0.3`。
+//  [project-name]  可选，要新建的项目名称。 如果指定，则在当前目录下新建一个子目录作为项目专用目录。
+//示例：
+//  definejs init pc
+//  definejs init pc@1.0.3
+//  definejs init pc definejs-pc
+//  definejs init pc@1.0.3 definejs-pc
+//
+//  definejs init mobile
+//  definejs init mobile@1.0.2
+//  definejs init mobile definejs-mobile
+//  definejs init mobile@1.0.2 definejs-mobile
+
 
 require('colors');
 
-const path = require('path');
 const { program, } = require('commander');
-const inquirer = require('inquirer');
-const fs = require('fs');
-const Config = require('../lib/Config');
+const NPM = require('./init/NPM');
 
-
-program.usage('<template-name> <project-name>');
+program.usage('<template-name> [project-name]');
 program.option('-f, --force', 'force overwite the target config.js file when it is existed.');
 program.parse(process.argv);
 
 let opts = program.opts();
-let type = program.args[0];
-let dir = program.args[1];
+let args = program.args;
 
-if (!type || !dir) {
-    if (!type) {
-        console.log(`Please provide argument: <template-name>, eg: 'default' | 'mobile' | 'pc'`.red);
-    }
-
-    if (!dir) {
-        console.log(`Please provide argument: <project-name>, eg: 'definejs-test'`.red);
-    }
-
+if (args.length < 1) {
     return program.help();
 }
 
+let template = args[0];
+let project = args[1];
 
-
-
-let cwd = process.cwd();
-let destDir = path.join(cwd, dir);
-let destFile = path.join(cwd, dir, Config.name);
-
-
-
-//没有显式指定要强制覆盖，且已存在目标文件，则弹出确认提示。
-if (!opts.force && fs.existsSync(destFile) ) {
-    console.log(`Target '${Config.name}' is already existed.`.red);
-    prompt(copy);
-}
-else {
-    copy();
-}
+NPM.download(template, project, opts.force);
 
 
 
 
 
-function copy() {
-    Config.copy(type, destDir);
-
-    console.log('Init completed!'.green);
-    console.log('To get started, run command:'.bold);
-
-    
-    console.log(`├──`, `cd ${dir}`.blue);
-    console.log(`├──`, `npm install`.blue);
-    console.log(`└──`, `definejs pack`.blue);
-
-
-}
-
-function prompt(next) {
-    inquirer.prompt([
-        {
-            name: 'overwrite',
-            type: 'input',
-            message: 'Overwrite? ' + 'Y/N'.cyan,
-        },
-    ]).then((answer) => {
-        let { overwrite, } = answer;
-
-        overwrite = overwrite.toUpperCase();
-
-        if (overwrite == 'N') {
-            return;
-        }
-
-        if (overwrite == 'Y') {
-            next();
-        }
-        else {
-            prompt(next);
-        }
-    });
-}

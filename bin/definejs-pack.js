@@ -1,10 +1,18 @@
+#!/usr/bin/env node
+
+//开始打包。
+//当前工作目录下必须存在 `definejs.packer.config.js` 配置文件。
+//建议先用 `definejs init <template-name> [project-name]` 命令进行初始化以下载相应的模板，
+//然后根据实际需要修改 [project-name] 目录中的 `definejs.packer.config.js` 配置文件后，
+//再进行运行 `definejs pack` 进行打包。
+//
+//示例：
+//  definejs pack
 
 const { program, } = require('commander');
 const { pack, } = require('@definejs/packer');
 const File = require('@definejs/file');
-const Config = require('../lib/Config');
-
-
+const Config = require('./pack/Config');
 
 
 //解析命令行参数。
@@ -18,7 +26,7 @@ if (!config) {
     return;
 }
 
-pack(config, (config, metaInfo) => {
+pack(config, function (config, metaInfo) {
     //输出最终的 config 以供查阅。
     File.writeJSON(`${config.outputDir}config.json`, config);
 
