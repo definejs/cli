@@ -20,15 +20,17 @@ module.exports = {
 
         let loading = ora();
         let pkg = `@definejs/template-${template}`;
-        let cmd = `npm install ${pkg}`;
 
+        //先初始化一个空的 package.json 文件，
+        //可以避免安装到含有 package.json 的父目录中。
+        let cmd = `npm init -y && npm install ${pkg}`; 
 
         console.log('Start initializing...'.blue);
         loading.start(cmd.blue); //出现加载图标。
 
 
         exec(cmd, { 'cwd': home, }, function (error, stdout, stderr) {
-            console.log(stdout);
+            // console.log(stdout);
 
             if (error) {
                 console.log('');

@@ -11,6 +11,7 @@ require('colors');
 
 const { program, } = require('commander');
 const Requirer = require('@definejs/requirer');
+const Tree = require('./require/Tree');
 
 //解析命令行参数。
 program.parse(process.argv);
@@ -18,31 +19,36 @@ program.parse(process.argv);
 let dir = program.args[0] || process.cwd();
 let pkg = require(`${dir}/package.json`);
 
-console.log(dir.yellow.underline);
-console.log(`${pkg.name}@${pkg.version}`.cyan.bold);
+console.log(dir.yellow.underline, `==>`, `${pkg.name}@${pkg.version}`.bgCyan);
 
 
 let {
     dependencies,
     ids,
+    id$files,
     needAdds,
     needDeletes,
 } = Requirer.parse(dir);
 
+
+
+console.log(`dependencies:`.bold, dependencies);
+console.log(`requires:`.bold, ids);
+console.log(`id$files:`.bold);
+
+Tree.render(id$files, dir);
+
+
 let hasError = false;
-
-
-console.log(`dependencies:`, dependencies);
-console.log(`requires:`, ids);
 
 if (needAdds.length > 0) {
     hasError = true;
-    console.log('needAdds ==>'.red, needAdds);
+    console.log('needAdds ==>'.bold.red, needAdds);
 }
 
 if (needDeletes.length > 0) {
     hasError = true;
-    console.log('needDeletes ==>'.magenta, needDeletes);
+    console.log('needDeletes ==>'.bold.magenta, needDeletes);
 }
 
 if (!hasError) {
