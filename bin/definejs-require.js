@@ -11,6 +11,7 @@ require('colors');
 
 const { program, } = require('commander');
 const Requirer = require('@definejs/requirer');
+const Config = require('./require/Config');
 const Tree = require('./require/Tree');
 
 //解析命令行参数。
@@ -18,6 +19,7 @@ program.parse(process.argv);
 
 let dir = program.args[0] || process.cwd();
 let pkg = require(`${dir}/package.json`);
+let config = Config.read(dir);
 
 console.log(dir.yellow.underline, `==>`, `${pkg.name}@${pkg.version}`.bgCyan);
 
@@ -28,7 +30,7 @@ let {
     id$files,
     needAdds,
     needDeletes,
-} = Requirer.parse(dir);
+} = Requirer.parse(dir, config.patterns);
 
 
 
