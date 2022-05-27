@@ -14,17 +14,26 @@ const { pack, } = require('@definejs/packer');
 const File = require('@definejs/file');
 const Config = require('./pack/Config');
 
-
-//解析命令行参数。
-program.parse(process.argv);
-
-
 let config = Config.get();
-
 
 if (!config) {
     return;
 }
+
+
+program.option('-i, --install', 'run command `npm install`');
+
+//解析命令行参数。
+program.parse(process.argv);
+
+let opts = program.opts();
+let args = program.args;
+
+if (typeof opts.install == 'boolean') {
+    config.install = opts.install;
+}
+
+
 
 pack(config, function (config, metaInfo) {
     //输出最终的 config 以供查阅。
